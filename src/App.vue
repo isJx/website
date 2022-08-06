@@ -1,8 +1,8 @@
 <template>
   <router-view></router-view>
   <el-button-group>
-    <el-button @click="toRoute('home')">王敏</el-button>
-    <el-button @click="toRoute('about')">靳悦</el-button>
+    <el-button @click="toRoute('home')">home</el-button>
+    <el-button @click="toRoute('about')">about</el-button>
   </el-button-group>
 </template>
 
