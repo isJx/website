@@ -12,9 +12,14 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { routePath } from "@/router/index";
+import { ref, unref, watchEffect } from "vue";
 
-const activeIndex = ref("");
+const activeIndex = ref<string>("");
+
+watchEffect(() => {
+  activeIndex.value = unref(routePath);
+});
 </script>
 
 <style></style>
