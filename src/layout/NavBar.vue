@@ -6,7 +6,7 @@
     router
   >
     <el-menu-item index="home">首页</el-menu-item>
-    <el-menu-item index="about">关于</el-menu-item>
+    <el-menu-item index="about">About</el-menu-item>
   </el-menu>
   <div class="h-6" />
 </template>
