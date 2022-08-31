@@ -4,4 +4,13 @@
 
 <script setup lang="ts"></script>
 
-<style></style>
+<style>
+#app {
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+</style>
