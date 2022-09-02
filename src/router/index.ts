@@ -34,9 +34,8 @@ const router = createRouter({
 
 export const routePath = ref<string>("");
 
-router.beforeEach((to, form, next) => {
+router.afterEach((to, from) => {
   routePath.value = to.name as string;
-  next();
 });
 
 export default router;
