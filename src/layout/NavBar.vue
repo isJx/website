@@ -5,14 +5,14 @@
     mode="horizontal"
     router
   >
-    <el-menu-item index="home">首页</el-menu-item>
-    <el-menu-item index="about">About</el-menu-item>
+    <MenuItem :baseRouter="baseRouter" />
   </el-menu>
   <div class="h-6" />
 </template>
 
 <script lang="ts" setup>
-import { routePath } from "@/router/index";
+import MenuItem from "@/components/MenuItem.vue";
+import { baseRouter, routePath } from "@/router/index";
 import { ref, unref, watchEffect } from "vue";
 
 const activeIndex = ref<string>("");

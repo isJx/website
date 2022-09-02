@@ -5,23 +5,25 @@ import About from "@/views/About.vue";
 import Home from "@/views/Home.vue";
 import { ref } from "vue";
 
+export const baseRouter: Array<RouteRecordRaw> = [
+  {
+    path: "/home",
+    name: "home",
+    component: Home,
+  },
+  {
+    path: "/about",
+    name: "about",
+    component: About,
+  },
+];
+
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
     component: Index,
     redirect: "/home",
-    children: [
-      {
-        path: "/home",
-        name: "home",
-        component: Home,
-      },
-      {
-        path: "/about",
-        name: "about",
-        component: About,
-      },
-    ],
+    children: baseRouter,
   },
 ];
 
