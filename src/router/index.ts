@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import Index from "@/layout/Index.vue";
 import About from "@/views/About.vue";
 import Home from "@/views/Home.vue";
+import Login from "@/views/Login.vue";
 import { ref } from "vue";
 
 export const baseRouter: Array<RouteRecordRaw> = [
@@ -22,8 +23,13 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/",
     component: Index,
-    redirect: "/home",
+    redirect: "/login",
     children: baseRouter,
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: Login,
   },
 ];
 
