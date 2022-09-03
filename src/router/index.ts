@@ -4,6 +4,7 @@ import Index from "@/layout/Index.vue";
 import About from "@/views/About.vue";
 import Home from "@/views/Home.vue";
 import Login from "@/views/Login.vue";
+import { ElMessage } from "element-plus/es";
 import { ref } from "vue";
 
 export const baseRouter: Array<RouteRecordRaw> = [
@@ -42,6 +43,20 @@ export const routePath = ref<string>("");
 
 router.afterEach((to, from) => {
   routePath.value = to.name as string;
+});
+
+export const isLogin = ref<boolean>(true);
+
+router.beforeEach((to, form, next) => {
+  if (to.name === "login") {
+    next();
+    return;
+  }
+  if (!isLogin.value) {
+    ElMessage.warning("请先登陆");
+    next({ name: "login" });
+  }
+  next();
 });
 
 export default router;
