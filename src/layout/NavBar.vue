@@ -7,7 +7,6 @@
   >
     <MenuItem :baseRouter="baseRouter" />
   </el-menu>
-  <div class="h-6" />
 </template>
 
 <script lang="ts" setup>
