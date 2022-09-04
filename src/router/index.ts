@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 
 import Index from "@/layout/Index.vue";
+import { isLogin } from "@/utils/is";
 import About from "@/views/About.vue";
 import Home from "@/views/Home.vue";
 import Login from "@/views/Login.vue";
@@ -24,7 +25,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/",
     component: Index,
-    redirect: "/login",
+    redirect: "/home",
     children: baseRouter,
   },
   {
@@ -45,14 +46,12 @@ router.afterEach((to, from) => {
   routePath.value = to.name as string;
 });
 
-export const isLogin = ref<boolean>(true);
-
 router.beforeEach((to, form, next) => {
   if (to.name === "login") {
     next();
     return;
   }
-  if (!isLogin.value) {
+  if (!isLogin()) {
     ElMessage.warning("请先登陆");
     next({ name: "login" });
   }

@@ -21,6 +21,7 @@
 </template>
 
 <script setup lang="ts">
+import router from "@/router";
 import { FormInstance, FormRules } from "element-plus/es";
 import { reactive, ref } from "vue";
 
@@ -39,7 +40,8 @@ const rules = reactive<FormRules>({
 const handleLogin = async () => {
   const valid = await ruleFormRef.value?.validate();
   if (valid) {
-    console.log(formData.value);
+    window.localStorage.setItem("isLogin", "true");
+    router.push("home");
   }
 };
 </script>
