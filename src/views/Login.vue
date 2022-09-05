@@ -40,7 +40,7 @@ const rules = reactive<FormRules>({
 const handleLogin = async () => {
   const valid = await ruleFormRef.value?.validate();
   if (valid) {
-    window.localStorage.setItem("isLogin", "true");
+    window.localStorage.setItem("userInfo", JSON.stringify(formData.value));
     router.push("home");
   }
 };
