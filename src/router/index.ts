@@ -5,6 +5,7 @@ import { isLogin } from "@/utils/is";
 import About from "@/views/About.vue";
 import Home from "@/views/Home.vue";
 import Login from "@/views/Login.vue";
+import Other from "@/views/Other.vue";
 import { ElMessage } from "element-plus/es";
 import { ref } from "vue";
 
@@ -18,6 +19,11 @@ export const baseRouter: Array<RouteRecordRaw> = [
     path: "/about",
     name: "about",
     component: About,
+  },
+  {
+    path: "/other",
+    name: "other",
+    component: Other,
   },
 ];
 
