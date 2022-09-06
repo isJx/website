@@ -8,7 +8,10 @@
           <el-input v-model="formData.userName"></el-input>
         </el-form-item>
         <el-form-item prop="passWord">
-          <el-input v-model="formData.passWord"></el-input>
+          <el-input
+            @keyup.enter="handleLogin"
+            v-model="formData.passWord"
+          ></el-input>
         </el-form-item>
         <el-form-item>
           <el-button @click="handleLogin" type="success" style="width: 100%">
@@ -22,14 +25,14 @@
 
 <script setup lang="ts">
 import router from "@/router";
-import { FormInstance, FormRules } from "element-plus/es";
+import { ElMessage, FormInstance, FormRules } from "element-plus/es";
 import { reactive, ref } from "vue";
 
 const ruleFormRef = ref<FormInstance>();
 
 const formData = ref({
-  userName: "admin",
-  passWord: 123456,
+  userName: "",
+  passWord: "",
 });
 
 const rules = reactive<FormRules>({
@@ -37,11 +40,30 @@ const rules = reactive<FormRules>({
   passWord: [{ required: true, message: "请输入密码", trigger: "blur" }],
 });
 
+type UserList = {
+  userName: string;
+  passWord: string;
+};
+
+const userList = ref<UserList[]>([
+  { userName: "admin", passWord: "123456" },
+  { userName: "guochang", passWord: "123456" },
+]);
+
 const handleLogin = async () => {
   const valid = await ruleFormRef.value?.validate();
   if (valid) {
-    window.localStorage.setItem("userInfo", JSON.stringify(formData.value));
-    router.push("home");
+    const userValid = userList.value.some((item) => {
+      const { userName, passWord } = formData.value;
+      return item.userName == userName && item.passWord == passWord;
+    });
+    if (userValid) {
+      window.localStorage.setItem("userInfo", JSON.stringify(formData.value));
+      router.replace("home");
+      ElMessage.success("登陆成功");
+    } else {
+      ElMessage.error("用户名或密码错误");
+    }
   }
 };
 </script>

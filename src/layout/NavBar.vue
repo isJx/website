@@ -37,7 +37,7 @@
 
 <script lang="ts" setup>
 import MenuItem from "@/components/MenuItem.vue";
-import { baseRouter, routePath } from "@/router/index";
+import router, { baseRouter, routePath } from "@/router/index";
 import { onMounted, ref, unref, watchEffect } from "vue";
 
 const activeIndex = ref<string>("");
@@ -54,6 +54,8 @@ watchEffect(() => {
 });
 
 const handleClick = (val: string) => {
+  window.localStorage.removeItem("userInfo");
+  router.replace({ name: "login" });
   console.log(11, val);
 };
 
