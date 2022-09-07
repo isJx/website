@@ -6,7 +6,6 @@ import About from "@/views/About.vue";
 import Home from "@/views/Home.vue";
 import Login from "@/views/Login.vue";
 import Other2 from "@/views/Other2.vue";
-import { ElMessage } from "element-plus/es";
 import { ref } from "vue";
 
 export const baseRouter: Array<RouteRecordRaw> = [
@@ -66,7 +65,6 @@ router.beforeEach((to, form, next) => {
     return;
   }
   if (!isLogin()) {
-    ElMessage.warning("请先登陆");
     next({ name: "login" });
   }
   next();
