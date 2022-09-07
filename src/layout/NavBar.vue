@@ -56,7 +56,6 @@ watchEffect(() => {
 const handleClick = (val: string) => {
   window.localStorage.removeItem("userInfo");
   router.replace({ name: "login" });
-  console.log(11, val);
 };
 
 const getUserInfo = () => {
