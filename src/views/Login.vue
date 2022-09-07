@@ -31,8 +31,8 @@ import { reactive, ref } from "vue";
 const ruleFormRef = ref<FormInstance>();
 
 const formData = ref({
-  userName: "",
-  passWord: "",
+  userName: "admin",
+  passWord: "123456",
 });
 
 const rules = reactive<FormRules>({
@@ -47,7 +47,8 @@ type UserList = {
 
 const userList = ref<UserList[]>([
   { userName: "admin", passWord: "123456" },
-  { userName: "guochang", passWord: "123456" },
+  { userName: "zhaoyuhuan", passWord: "123456" },
+  { userName: "jinxu", passWord: "123456" },
 ]);
 
 const handleLogin = async () => {
