@@ -22,7 +22,6 @@ export const baseRouter: Array<RouteRecordRaw> = [
   {
     path: "/other",
     name: "other",
-    // component: Other,
     redirect: "/other",
     children: [
       {
