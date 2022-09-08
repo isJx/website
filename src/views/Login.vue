@@ -43,10 +43,11 @@ const rules = reactive<FormRules>({
 type UserList = {
   userName: string;
   passWord: string;
+  roles?: string[];
 };
 
 const userList = ref<UserList[]>([
-  { userName: "admin", passWord: "123456" },
+  { userName: "admin", passWord: "123456", roles: ["admin"] },
   { userName: "zhaoyuhuan", passWord: "123456" },
   { userName: "jinxu", passWord: "123456" },
 ]);
@@ -54,12 +55,14 @@ const userList = ref<UserList[]>([
 const handleLogin = async () => {
   const valid = await ruleFormRef.value?.validate();
   if (valid) {
-    const userValid = userList.value.some((item) => {
+    const userInfo = userList.value.find((item) => {
       const { userName, passWord } = formData.value;
-      return item.userName == userName && item.passWord == passWord;
+      if (item.userName === userName && item.passWord === passWord) {
+        return item;
+      }
     });
-    if (userValid) {
-      window.localStorage.setItem("userInfo", JSON.stringify(formData.value));
+    if (userInfo) {
+      window.localStorage.setItem("userInfo", JSON.stringify(userInfo));
       router.replace("home");
       ElMessage.success("登陆成功");
     } else {
