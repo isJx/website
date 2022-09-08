@@ -5,7 +5,7 @@ import { isLogin } from "@/utils/is";
 import About from "@/views/About.vue";
 import Home from "@/views/Home.vue";
 import Login from "@/views/Login.vue";
-import Other2 from "@/views/Other2.vue";
+import Other from "@/views/Other.vue";
 import { ref } from "vue";
 
 export const baseRouter: Array<RouteRecordRaw> = [
@@ -23,12 +23,12 @@ export const baseRouter: Array<RouteRecordRaw> = [
     path: "/other",
     name: "other",
     // component: Other,
-    redirect: "/other2",
+    redirect: "/other",
     children: [
       {
-        name: "other2",
-        path: "/other2",
-        component: Other2,
+        name: "other",
+        path: "/other",
+        component: Other,
       },
     ],
   },
