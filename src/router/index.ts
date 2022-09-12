@@ -1,11 +1,17 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import {
+  createRouter,
+  createWebHashHistory,
+  RouteLocationNormalized,
+  RouteRecordRaw,
+} from "vue-router";
 
 import Index from "@/layout/Index.vue";
-import { isLogin } from "@/utils/is";
+import { getUserInfo } from "@/utils/localStorage";
 import About from "@/views/About.vue";
 import Home from "@/views/Home.vue";
 import Login from "@/views/Login.vue";
 import Other from "@/views/Other.vue";
+import { ElMessage } from "element-plus/es";
 import { ref } from "vue";
 
 export const baseRouter: Array<RouteRecordRaw> = [
@@ -67,15 +73,27 @@ router.afterEach((to, from) => {
   routePath.value = to.name as string;
 });
 
+export const hasRole = (route: RouteLocationNormalized): boolean => {
+  const userRole: string[] = getUserInfo();
+  return userRole.some((item) =>
+    (route.meta?.roles as string[]).includes(item)
+  );
+};
+
+const routeList = ["/", "/home", "/login"];
+
 router.beforeEach((to, form, next) => {
-  if (to.name === "login") {
+  if (routeList.includes(to.path)) {
     next();
     return;
   }
-  if (!isLogin()) {
-    next({ name: "login" });
+  if (hasRole(to)) {
+    next();
+    return;
+  } else {
+    ElMessage.warning("权限错误，已重定向至首页！");
+    next({ name: "home" });
   }
-  next();
 });
 
 export default router;
