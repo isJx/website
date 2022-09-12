@@ -1,12 +1,12 @@
 <template>
   <template v-for="item of props.baseRouter">
-    <el-menu-item v-if="!item.children" :index="item.name">
-      {{ item.name }}
-    </el-menu-item>
-    <el-sub-menu v-else :index="item.name">
+    <el-sub-menu v-if="item.children && item.children[0]" :index="item.name">
       <template #title>{{ item.name }}</template>
       <MenuItem :baseRouter="item.children" />
     </el-sub-menu>
+    <el-menu-item v-if="item.children == undefined" :index="item.name">
+      {{ item.name }}
+    </el-menu-item>
   </template>
 </template>
 

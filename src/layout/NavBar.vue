@@ -14,7 +14,7 @@
         mode="horizontal"
         router
       >
-        <MenuItem :baseRouter="baseRouter" />
+        <MenuItem :baseRouter="menuList" />
       </el-menu>
     </div>
     <div>
@@ -38,7 +38,8 @@
 <script lang="ts" setup>
 import MenuItem from "@/components/MenuItem.vue";
 import router, { baseRouter, routePath } from "@/router/index";
-import { onMounted, ref, unref, watchEffect } from "vue";
+import { computed, onMounted, ref, unref, watch, watchEffect } from "vue";
+import { RouteRecordRaw } from "vue-router";
 
 const activeIndex = ref<string>("");
 
@@ -48,10 +49,44 @@ type UserInfo = {
 };
 
 const userInfo = ref<UserInfo>({});
+const menuList = ref<RouteRecordRaw[]>([]);
 
 watchEffect(() => {
   activeIndex.value = unref(routePath);
 });
+
+const userRole = computed((): string => {
+  return JSON.parse(window.localStorage.getItem("userInfo") as string).roles[0];
+});
+
+const getRoleRouteList = (routes: RouteRecordRaw[]): any => {
+  return routes.map((route) => {
+    if (
+      route.meta?.roles &&
+      (route.meta?.roles as string[]).includes(userRole.value)
+    ) {
+      return route;
+    }
+    if (route.children) {
+      return {
+        path: route.path,
+        name: route.name,
+        children: getRoleRouteList(route.children),
+      };
+    }
+    return;
+  });
+};
+
+watch(
+  () => baseRouter,
+  () => {
+    menuList.value = getRoleRouteList(baseRouter);
+  },
+  {
+    immediate: true,
+  }
+);
 
 const handleClick = (val: string) => {
   window.localStorage.removeItem("userInfo");

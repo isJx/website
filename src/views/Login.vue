@@ -49,7 +49,7 @@ type UserList = {
 const userList = ref<UserList[]>([
   { userName: "admin", passWord: "123456", roles: ["admin"] },
   { userName: "zhaoyuhuan", passWord: "123456" },
-  { userName: "jinxu", passWord: "123456" },
+  { userName: "jinxu", passWord: "123456", roles: ["other"] },
 ]);
 
 const handleLogin = async () => {

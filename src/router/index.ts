@@ -13,11 +13,17 @@ export const baseRouter: Array<RouteRecordRaw> = [
     path: "/home",
     name: "home",
     component: Home,
+    meta: {
+      roles: ["admin", "other"],
+    },
   },
   {
     path: "/about",
     name: "about",
     component: About,
+    meta: {
+      roles: ["admin", "other"],
+    },
   },
   {
     path: "/other",
@@ -28,6 +34,9 @@ export const baseRouter: Array<RouteRecordRaw> = [
         name: "other",
         path: "/other",
         component: Other,
+        meta: {
+          roles: ["admin"],
+        },
       },
     ],
   },
