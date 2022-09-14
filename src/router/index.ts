@@ -6,6 +6,7 @@ import {
 } from "vue-router";
 
 import Index from "@/layout/Index.vue";
+import { isLogin } from "@/utils/is";
 import { getUserInfo } from "@/utils/localStorage";
 import About from "@/views/About.vue";
 import Home from "@/views/Home.vue";
@@ -83,6 +84,11 @@ export const hasRole = (route: RouteLocationNormalized): boolean => {
 const routeList = ["/", "/home", "/login"];
 
 router.beforeEach((to, form, next) => {
+  if (!isLogin() && to.name !== "login") {
+    next({ name: "login" });
+    ElMessage.warning("请先登录！");
+    return;
+  }
   if (routeList.includes(to.path)) {
     next();
     return;
