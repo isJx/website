@@ -83,6 +83,7 @@ watch(
   () => baseRouter,
   () => {
     menuList.value = getRoleRouteList(baseRouter);
+    console.log("整理路由", menuList.value);
   },
   {
     immediate: true,
